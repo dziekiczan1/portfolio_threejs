@@ -7,6 +7,7 @@ import { Leva } from "leva";
 import { calculateSizes } from "../constants/index.js";
 import HackerRoom from "../components/HackerRoom.jsx";
 import CanvasLoader from "../components/CanvasLoader.jsx";
+import Target from "../components/Target.jsx";
 
 const Hero = () => {
   // Use media queries to determine screen size
@@ -27,15 +28,18 @@ const Hero = () => {
         </p>
       </div>
       <div className="w-full h-full absolute inset-0">
-        <Leva />
         <Canvas className="w-full h-full">
           <Suspense fallback={<CanvasLoader />}>
-            <PerspectiveCamera makeDefault position={[0, 0, 30]} />
+            <Leva hidden />
+            <PerspectiveCamera makeDefault position={[0, 0, 20]} />
             <HackerRoom
               scale={sizes.deskScale}
               position={sizes.deskPosition}
               rotation={[0.1, -Math.PI, 0]}
             />
+            <group>
+              <Target position={sizes.targetPosition} />
+            </group>
             <ambientLight intensity={1} />
             <directionalLight position={[10, 10, 10]} intensity={0.5} />
           </Suspense>
